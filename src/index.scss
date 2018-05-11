@@ -1,0 +1,176 @@
+.todo-app{
+  width:620px;
+  background: #fff;
+    margin: 130px 0 40px 0;
+    position: relative;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+  input[type="checkbox"],input[type="text"]{
+    box-sizing: border-box;
+  }
+  button, input[type="checkbox"]{
+        outline: none;
+  }
+  
+  & .todo-header{
+    position:relative;
+    & .new-todo{
+      padding:16px 16px 16px 60px;
+      width:100%;
+      outline:none;
+      font-size:24px;
+      border:none;
+    }
+    
+    & .toggle-all{
+      position:absolute;
+      height:34px;
+      width:60px;
+      bottom: 8px;
+      left: -10px;
+     -webkit-appearance: none;
+      appearance:none;
+      transform:rotate(90deg);
+      outline:none;
+      text-align:center;
+      &:checked::before{
+        color:#737373;
+      }
+      
+      &::before{
+        content:'❯';
+        font-size:22px;
+        color:#e6e6e6;
+        padding:10px 27px 10px 27px;
+      }
+    }
+  }
+  
+  & .todo-content{
+    border-top:1px solid #e6e6e6;
+  }
+  
+  & .todo-list{
+    margin:0;
+    list-style:none;
+    padding:0;
+    
+    & li{
+      font-size:24px;
+      position:relative;
+      
+      &:hover .destroy{
+        display:block;
+      }
+    }
+    
+    & .todo-item.editing{
+        & .edit{
+          display:block;
+          padding: 13px 17px 12px 17px;
+          margin-left:43px;
+          width:calc(100% - 43px);
+        }
+      & .view{
+        display:none;
+      }
+    }
+    
+    & .todo-item{
+        & .edit{
+          display:none;
+          outline:none;
+          font-size:inherit;
+          border:1px solid #999;
+          box-shadow:inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
+        }
+      
+        & label{
+          white-space:pre-line;
+          padding:15px 60px 15px 15px;
+          margin-left:45px;
+          display:block;
+          line-height:1.2;
+        }
+        & .destroy{
+          position:absolute;
+          top:0;
+          bottom:0;
+          right:10px;
+          width: 40px;
+          height: 40px;
+          margin:auto 0;
+          border:none;
+          display: none;
+          background:none;
+          font-size: 30px;
+          color: #cc9a9a;
+          cursor:pointer;
+          &::before{
+            content:'×';
+          }
+        }
+        & .toggle{
+          position:absolute;
+          width:40px;
+          height: 40px;
+          top:0;
+          bottom:0;
+          margin:auto 0;
+          border: none;
+          -webkit-appearance: none;
+          appearance: none;
+          text-align:center;
+          
+          &:checked::after{
+content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#bddad5" stroke-width="3"/><path fill="#5dc2af" d="M72 25L42 71 27 56l-4 4 20 20 34-52z"/></svg>');
+
+          }
+          &::after{
+            content:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#ededed" stroke-width="3"/></svg>');  
+          }
+        }
+    }
+
+  }
+  
+  & .todo-footer{
+    border-top:1px solid #e6e6e6;
+    padding: 10px 15px;
+    color: #777;
+    
+    & .clear-completed{
+      float:right;
+      background:none;
+      outline:none;
+      border:none;
+      color:inherit;
+      
+      &:hover{
+        cursor:pointer;
+        text-decoration:underline;
+      }
+    }
+    & .links{
+      list-style:none;
+      margin:0;
+      padding:0;
+      
+      .todo-link{
+        display:inline-block;
+        
+        & a{
+          text-decoration:none;
+          color:inherit;
+          padding:3px 7px;
+          margin:3px;
+          border:1px solid transparent;
+          
+          &.selected{
+            border-color:rgba(175, 47, 47, 0.2);
+          }
+        }
+      }
+    }
+    
+  }
+}
