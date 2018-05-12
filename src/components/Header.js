@@ -8,6 +8,7 @@ export default class Header extends React.Component{
 
 		this.state={
 			value:'',
+			isToggleAll:false,
 		};
 
 		this.handleSubmit=this._handleSubmit.bind(this);
@@ -15,22 +16,30 @@ export default class Header extends React.Component{
 	}
 
 	_handleSubmit(event){
-		this.props.addTask(this.state.value);
+		this.props.addTodo(this.state.value);
+		this.setState({
+			value:'',
+		});
+		event.preventDefault();
 		return false;
+	}
+
+	toggleAll(flag){
+		this.setState({isToggleAll:flag},()=>this.props.toggleAll(flag));
 	}
 
 	_onValueChange(event){
 		this.setState({
-			value:event.target.task.value,
+			value:event.target.value,
 		});
 	}
 
 	render(){
 
 		return (<div className="todo-header">
-    			 	<input type="checkbox" className="toggle-all" />
+    			 	<input type="checkbox" checked={this.state.toggleAll} onChange={this.toggleAll.bind(this,!this.state.isToggleAll)} className="toggle-all" />
      					<form onSubmit={this.handleSubmit}>
-       						<input className="new-todo" name="task" onChange={this.onValueChange} value={this.state.value} type="text" />
+       						<input className="new-todo" name="todo" onChange={this.onValueChange} value={this.state.value} type="text" />
     					</form>
   				</div>);
 	}
