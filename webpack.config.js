@@ -36,6 +36,12 @@ module.exports = {
       }
     ]
   },
+  resolve:{
+    alias:{
+      root:path.resolve(__dirname,'src'),
+      utilities:path.resolve(__dirname,'src/utilities'),
+    }
+  },
   plugins: [
     // new ExtractTextPlugin({
     //   filename: 'style.[hash].css', disable: false, allChunks: true
