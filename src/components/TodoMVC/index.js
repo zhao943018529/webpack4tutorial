@@ -20,19 +20,7 @@ export default class TodoMVC extends React.Component{
 		this.deleteTodo = this._deleteTodo.bind(this);
 		this.toggleTodo = this._toggleTodo.bind(this);
 		this.toggleAll = this._toggleAll.bind(this);
-	}
-
-	componentDidMount(){
-		window.addEventListener('hashchange',()=>{
-			console.log(location.hash);
-			let hash = location.hash;
-			let result = hash.match(/All|Active|Completed/);
-			if(result!=null){
-				this.setState({
-					status:result[0],
-				})
-			}
-		});
+		this.handleSwitch = this._handleSwitch.bind(this);
 	}
 
 	_toggleTodo(id){
@@ -78,15 +66,15 @@ export default class TodoMVC extends React.Component{
 
 	_toggleAll(flag){
 		let updateTodos = this.state.todos;
-		if(this.state.status!=='All'){
-			let isCompleted = this.state.status==='Completed';
-			updateTodos=updateTodos.filter(todo=>todo.completed===isCompleted);
-		}
+
 		updateTodos.forEach(todo=>{
-			todo.completed=flag;
+			if(todo.completed!==flag){
+				todo.completed=flag;
+			}
 		});
+
 		this.setState({
-			todos:this.state.todos,
+			todos:updateTodos,
 		});
 	}
 
@@ -95,6 +83,12 @@ export default class TodoMVC extends React.Component{
 		let newTodos = todos.filter(todo=>!todo.completed);
 		this.setState({
 			todos:newTodos,
+		});
+	}
+
+	_handleSwitch(path){
+		this.setState({
+			status:path,
 		});
 	}
 
@@ -110,7 +104,7 @@ export default class TodoMVC extends React.Component{
 		return (<div className="todo-app">
 				<Header addTodo={this.addTodo} toggleAll={this.toggleAll} />
 				<Content {...cprops} />
-				<Footer status={this.state.status} clearCompleted={this.clearCompleted.bind(this)}/>
+				<Footer status={this.state.status} handleSwitch={this.handleSwitch} clearCompleted={this.clearCompleted.bind(this)}/>
 			</div>);
 	}
 }

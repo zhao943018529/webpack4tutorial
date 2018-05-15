@@ -8,6 +8,7 @@ export default class Bundle extends React.Component{
 		this.state={
 			Component:null,
 		};
+
 		props.load().then(Component=>this.setState({
 			Component:Component.default,
 		}));
