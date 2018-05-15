@@ -1,4 +1,4 @@
-import createHistory from 'history/createBrowserHistroy';
+import createHistory from 'history/createBrowserHistory';
 
 const ROUTERCHANGE="@#ROUTERCHANGE";
 

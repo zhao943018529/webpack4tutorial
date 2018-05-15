@@ -4,7 +4,7 @@
 import React from 'react';
 import {Switch,Route} from 'react-router-dom';
 import Bundle from 'utilities/Bundle';
-import injectReducers form '../store/injectReducers';
+import injectReducers from '../store/injectReducers';
 import HomeReducer from '../reducers/HomeReducer';
 
 
@@ -13,8 +13,8 @@ export default function createRoutes(store){
 		exact:true,
 		path:"/",
 		component:props=>(<Bundle {...props}  load={()=>{
-				store.reset(injectReducers({home:HomeReducer}));
-				return import('./TodoMVC');
+				store.reset(injectReducers(store,{home:HomeReducer}));
+				return import('./Home');
 			}
 		}/>),
 	},{
@@ -26,7 +26,8 @@ export default function createRoutes(store){
 	},{
 		path:"/editor",
 		component:props=>(<Bundle {...props} load={()=>{
-			return import('./Editor')};
+			return import('./Editor');
+		}
 		}/>),
 	}];
 

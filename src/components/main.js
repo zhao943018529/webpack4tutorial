@@ -1,18 +1,14 @@
 import React from 'react';
 import {Switch,Route} from 'react-router-dom';
 import Bundle from 'utilities/Bundle';
-import injectReducers form '../store/injectReducers';
+import injectReducers from '../store/injectReducers';
 import HomeReducer from '../reducers/HomeReducer';
-import createRoutes
 
-const Main=()=>(
+
+const Main=({routes})=>(
 		<main>
 			<Switch>
-				<Route exact path="/" component={props=>(<Bundle {...props} preload={()=>{
-					injectReducers({home:HomeReducer});
-				}} load={()=>import('./Home')}/>)} />
-				<Route path="/todos" component={props=>(<Bundle {...props} load={()=>import('./TodoMVC')}/>)} />
-				<Route path="/editor" component={props=>(<Bundle {...props} load={()=>import('./Editor')}/>)} />				
+				{routes.map((route,i)=>(<Route key={i} exact={!!route.exact} path={route.path} component={route.component} />))}				
 			</Switch>
 		</main>
 		);

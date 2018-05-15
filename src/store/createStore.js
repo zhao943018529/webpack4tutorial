@@ -3,11 +3,11 @@ import thunk from 'redux-thunk';
 import {makeRootReducer} from './injectReducers';
 import HomeReducer from '../reducers/HomeReducer';
 
-const @RESET = "@RESET";
+const RESET = "@RESET";
 
 const resetReducer = (reducer, resetState) => (state, action) => {
-	if (action.type === @RESET) {
-		return preState;
+	if (action.type === RESET) {
+		return {...state,...resetState};
 	} else {
 		return reducer(state, action);
 	}
@@ -18,9 +18,9 @@ const resetEnhancer = createStore => (reducer, preloadedState) => {
 	let reset = (reducers, preState) => {
 		preState = preState || store.getState();
 		const newReducer = resetReducer(reducers, preState);
-		store.replaceReducer(reducers);
+		store.replaceReducer(newReducer);
 		store.dispatch({
-			type: @RESET
+			type: RESET
 		});
 	}
 
