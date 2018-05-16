@@ -1,6 +1,8 @@
 import React from 'react';
-import Quill from 'quill';
+import hljs from 'highlight.js'
+import 'highlight.js/styles/monokai-sublime.css'
 import katex from 'katex';
+import Quill from 'quill';
 import "./index.scss";
 
 export default class Editor extends React.Component{
@@ -32,13 +34,16 @@ export default class Editor extends React.Component{
 		  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
 		  [{ 'font': fonts},{'size':[]}],
 		  [{ 'align': [] }],
-
+		  ['formula','image','video'],
 		  ['clean']                                         // remove formatting button
 		];
 
 		this.quill = new Quill(this.editorRef, {
 			modules: {
 				'formula': true,
+				'syntax':{
+					highlight:text=>hljs.highlightAuto(text).value,
+				},
 				'toolbar': toolbarOptions,
 			},
 			placeholder: 'Enter your notes',

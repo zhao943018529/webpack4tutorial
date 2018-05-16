@@ -5,8 +5,17 @@ const mapStateToProps = (state)=>({
 	home:state.home,
 });
 
-const Home = (props)=>(
-		<div>{props.home.description}</div>
-);
+class Home extends React.Component{
+	constructor(props){
+		super(props);
+	}
+
+	render(){
+
+		return (
+				<div>{this.props.home.description}</div>
+			);
+	}
+}
 
 export default connect(mapStateToProps)(Home);

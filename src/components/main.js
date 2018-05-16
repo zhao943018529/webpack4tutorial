@@ -4,7 +4,6 @@ import Bundle from 'utilities/Bundle';
 import injectReducers from '../store/injectReducers';
 import HomeReducer from '../reducers/HomeReducer';
 
-
 const Main=({routes})=>(
 		<main>
 			<Switch>
